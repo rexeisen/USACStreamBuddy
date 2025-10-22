@@ -10,7 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @State private var showingEvents = false
     @State private var viewModel = EventViewModel()
-
+    
+    
     var body: some View {
         VStack(spacing: 20) {
             switch viewModel.state {
