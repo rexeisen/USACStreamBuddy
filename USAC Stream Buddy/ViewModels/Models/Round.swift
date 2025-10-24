@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Round: String, Codable {
+enum Round: String, Codable, CaseIterable {
     case qualification = "Qualification"
     case final = "Final"
 }

@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - Models for decoding the `ranking` key
 
-struct RankingEntry: Codable, Identifiable {
+struct RankingEntry<Ascent: Codable>: Codable, Identifiable {
     // Use athlete_id as a stable identifier
     var id: Int { athleteID }
 
@@ -21,7 +21,7 @@ struct RankingEntry: Codable, Identifiable {
     let bib: String
     let rank: Int
     let score: String
-    let ascents: [BoulderAscent]
+    let ascents: [Ascent]
     let active: Bool
     let underAppeal: Bool
 
@@ -104,7 +104,16 @@ struct BoulderAscent: Codable {
     }
 }
 
-// Convenience wrapper if you want to decode the full response but only use `ranking` later
-struct EventResultsResponse: Codable {
-    let ranking: [RankingEntry]
+// Concrete typealiases for common ranking entry usages
+// Use these when decoding lead and bouldering result lists
+ typealias LeadRankingEntry = RankingEntry<LeadAscent>
+ typealias BoulderRankingEntry = RankingEntry<BoulderAscent>
+
+// Convenience wrappers for decoding full responses per discipline
+struct LeadEventResultsResponse: Codable {
+    let ranking: [LeadRankingEntry]
+}
+
+struct BoulderEventResultsResponse: Codable {
+    let ranking: [BoulderRankingEntry]
 }

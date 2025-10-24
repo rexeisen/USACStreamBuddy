@@ -8,7 +8,10 @@
 import Foundation
 import Combine
 
-class ResultViewModel {
+@Observable
+final class ResultViewModel {
+    var selectedRound: Round = .final
+    var onWall: [String: RankingEntry] = [:]
     var event: Event
     private(set) var resultURLs: [URL] = []
     private var timer: Timer?
@@ -20,16 +23,16 @@ class ResultViewModel {
     
     func processData() {
         // Build result URLs for each category in the event
-        var urls: [URL] = []
-        for category in event.categories {
-            // `URLEndpoint.results(category.id).url` is a throwing function returning URLRequest
-            if let request = try? URLEndpoint.results(category.rounds).url(),
-               let url = request.url {
-                urls.append(url)
-            }
-        }
-        self.resultURLs = urls
-        startTimer()
+//        var urls: [URL] = []
+//        for category in event.categories {
+//            // `URLEndpoint.results(category.id).url` is a throwing function returning URLRequest
+//            if let request = try? URLEndpoint.results(category.rounds).url(),
+//               let url = request.url {
+//                urls.append(url)
+//            }
+//        }
+//        self.resultURLs = urls
+//        startTimer()
     }
     
     deinit {

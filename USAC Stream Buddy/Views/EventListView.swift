@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct EventListView: View {
-    @Environment(\.dismiss) private var dismiss
     @State private var viewModel = EventListViewModel()
     @State private var searchText = ""
 
@@ -38,7 +37,6 @@ struct EventListView: View {
                 List(filteredEvents) { event in
                     Button {
                         onSelect(event)
-                        dismiss()
                     } label: {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(event.event)
