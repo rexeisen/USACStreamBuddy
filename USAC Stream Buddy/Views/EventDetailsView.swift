@@ -11,7 +11,7 @@ struct EventDetailsView: View {
     @State private var viewModel: ResultViewModel
     
     init(event: Event) {
-        viewModel = ResultViewModel(event: event)
+        viewModel = ResultViewModel(event: event, round: .final)
     }
     
     var body: some View {
@@ -23,7 +23,15 @@ struct EventDetailsView: View {
                     }
                 }
             }
+            Section {
+                Button("Start Timer") {
+                    viewModel.processData()
+                }
+                .buttonStyle(.borderedProminent)
+                .frame(maxWidth: .infinity, alignment: .center)
+            }
         }
+        .padding()
     }
 }
 

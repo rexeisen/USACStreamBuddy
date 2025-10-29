@@ -8,6 +8,7 @@
 import Foundation
 
 enum Discipline: String, Codable {
+    case unknown
     case lead
     case boulder
     case speed

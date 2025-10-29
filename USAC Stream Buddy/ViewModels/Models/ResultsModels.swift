@@ -7,9 +7,15 @@
 
 import Foundation
 
+// Common interface for ascent types in different disciplines
+protocol AscentRepresentable: Codable {
+    var routeID: Int { get }
+    var routeName: String { get }
+    var status: String { get }
+}
+
 
 // MARK: - Models for decoding the `ranking` key
-
 struct RankingEntry<Ascent: Codable>: Codable, Identifiable {
     // Use athlete_id as a stable identifier
     var id: Int { athleteID }
@@ -51,7 +57,7 @@ struct RankingEntry<Ascent: Codable>: Codable, Identifiable {
 "status":"confirmed",
 "top_tries":null
  */
-struct LeadAscent: Codable {
+struct LeadAscent: AscentRepresentable {
     let routeID: Int
     let routeName: String
     let top: Bool
@@ -76,7 +82,7 @@ struct LeadAscent: Codable {
     }
 }
 
-struct BoulderAscent: Codable {
+struct BoulderAscent: AscentRepresentable {
     let routeID: Int
     let routeName: String
     let top: Bool
@@ -117,3 +123,4 @@ struct LeadEventResultsResponse: Codable {
 struct BoulderEventResultsResponse: Codable {
     let ranking: [BoulderRankingEntry]
 }
+
