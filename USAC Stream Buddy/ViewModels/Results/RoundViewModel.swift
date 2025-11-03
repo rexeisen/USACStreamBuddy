@@ -12,7 +12,7 @@ import Combine
 final class RoundViewModel {
     var selectedRound: Round = .final
     private var event: Event
-    private(set) var resultURLRequests: [URLRequest] = []
+    private(set) var categoryResults: [CategoryResultsViewModel] = []
     
     private var discipline: Discipline = .unknown
     
@@ -24,19 +24,13 @@ final class RoundViewModel {
     
     func processData() {
         // Build result URLs for each category in the event
-        var urls: [URLRequest] = []
+        var categoryResults: [CategoryResultsViewModel] = []
         for category in event.categories {
             for round in category.rounds where round.round == selectedRound {
-                if let request = try? URLEndpoint.results(round.id).url() {
-                    discipline = round.discipline
-                    if urls.isEmpty {
-                        urls.append(request)
-                    }
-                }
-                    
+                categoryResults.append(CategoryResultsViewModel(categoryRound: round))
             }
         }
-        self.resultURLRequests = urls
+        self.categoryResults = categoryResults
         startTimer()
     }
     

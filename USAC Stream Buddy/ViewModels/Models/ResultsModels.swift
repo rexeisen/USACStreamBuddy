@@ -43,6 +43,22 @@ struct RankingEntry<Ascent: AscentRepresentable>: Codable, Identifiable {
         case active
         case underAppeal = "under_appeal"
     }
+    
+    func ascent(routeId: Int, status: String? = nil) -> Ascent? {
+        guard let ascent = self.ascents.first(where: { $0.routeID == routeId }) else {
+            return nil
+        }
+        
+        if let status {
+            if ascent.status == status {
+                return ascent
+            } else {
+                return nil
+            }
+        } else {
+            return ascent
+        }
+    }
 }
 
 
@@ -124,5 +140,9 @@ struct LeadEventResultsResponse: Codable {
 
 struct BoulderEventResultsResponse: Codable {
     let ranking: [BoulderRankingEntry]
+}
+
+struct GenericEventResultsResponse<T: AscentRepresentable>: Codable {
+    let ranking: [RankingEntry<T>]
 }
 

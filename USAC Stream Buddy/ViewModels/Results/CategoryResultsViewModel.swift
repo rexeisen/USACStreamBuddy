@@ -12,10 +12,10 @@ import Foundation
 final class CategoryResultsViewModel {
     let categoryRound: CategoryRound
     private let decoder = JSONDecoder()
-    
+
     @ObservationIgnored
     private var timer: Timer?
-    
+
     @ObservationIgnored
     private var isFetching: Bool = false
 
@@ -50,7 +50,8 @@ final class CategoryResultsViewModel {
     }
 
     private func fetch() async {
-        guard let request = try? URLEndpoint.results(categoryRound.id).url() else {
+        guard let request = try? URLEndpoint.results(categoryRound.id).url()
+        else {
             stopTimer()
             return
         }
@@ -88,18 +89,58 @@ final class CategoryResultsViewModel {
     }
 
     private func handleBoulderingResponse(data: Data) async throws {
-        let result = try decoder.decode(
-            BoulderEventResultsResponse.self,
+        let result: GenericEventResultsResponse = try decoder.decode(
+            GenericEventResultsResponse<BoulderAscent>.self,
             from: data
         )
+
+        let rankings = result.ranking
+        // Go through each route and find the item that is active
+        for route in categoryRound.routes {
+            var currentlyActive = rankings.filter {
+                $0.ascent(routeId: route.id, status: "active") != nil
+            }
+            
+            // We now want to sort these currently active routes by
+            // the ascent modified date
+            currentlyActive.sort { lhs, rhs in
+                let lAsc = lhs.ascent(routeId: route.id, status: "active")
+                let rAsc = rhs.ascent(routeId: route.id, status: "active")
+
+                switch (lAsc, rAsc) {
+                case let (l?, r?):
+                    return l.modified < r.modified
+                case (nil, nil):
+                    return false
+                case (_, nil):
+                    return true
+                case (nil, _):
+                    return false
+                }
+            }
+            
+            let documentDirectory = URL.documentsDirectory
+            let parsedKey = categoryRound.category + route.name
+            
+            if let lastActive = currentlyActive.last {
+                let value = "#\(lastActive.bib): \(lastActive.firstname) \(lastActive.lastname) "
+                let resultPath = documentDirectory.appending(path: "\(parsedKey)Results.txt")
+                do {
+                    try value.description.write(to: resultPath, atomically: true, encoding: .utf8)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            } else {
+                // Get the next person from the startlist
+            }
+        }
 
     }
 
     private func handleLeadResponse(data: Data) async throws {
-        let result = try decoder.decode(
-            LeadEventResultsResponse.self,
-            from: data
-        )
+        //        let result = try decoder.decode(
+        //            LeadEventResultsResponse.self,
+        //            from: data
+        //        )
     }
-
 }
