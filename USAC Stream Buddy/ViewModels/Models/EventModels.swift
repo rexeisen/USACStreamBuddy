@@ -40,6 +40,7 @@ struct CategoryRound: Codable, Identifiable {
         case status
         case discipline = "kind"
         case category
+        case routes
     }
 
     let id: Int
@@ -47,4 +48,19 @@ struct CategoryRound: Codable, Identifiable {
     let round: Round
     let status: String
     let category: String
+    let routes: [Route]
+}
+
+struct Route: Codable, Identifiable {
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case startListURL = "startlist"
+        case rankingURL = "ranking"
+    }
+    
+    let id: Int
+    let name: String
+    let startListURL: String
+    let rankingURL: String
 }

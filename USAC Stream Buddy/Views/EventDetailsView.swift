@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct EventDetailsView: View {
-    @State private var viewModel: ResultViewModel
+    @State private var viewModel: RoundViewModel
     
     init(event: Event) {
-        viewModel = ResultViewModel(event: event, round: .final)
+        viewModel = RoundViewModel(event: event, round: .final)
     }
     
     var body: some View {

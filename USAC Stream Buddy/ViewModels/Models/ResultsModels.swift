@@ -16,7 +16,7 @@ protocol AscentRepresentable: Codable {
 
 
 // MARK: - Models for decoding the `ranking` key
-struct RankingEntry<Ascent: Codable>: Codable, Identifiable {
+struct RankingEntry<Ascent: AscentRepresentable>: Codable, Identifiable {
     // Use athlete_id as a stable identifier
     var id: Int { athleteID }
 
@@ -64,6 +64,7 @@ struct LeadAscent: AscentRepresentable {
     let plus: Bool
     let rank: Int
     let correctiveRank: Int
+    let modified: Date
     let score: String
     let status: String
     let topTries: Int?
@@ -75,6 +76,7 @@ struct LeadAscent: AscentRepresentable {
         case plus
         case rank
         case correctiveRank = "corrective_rank"
+        case modified
         case score
         case status
         case topTries = "top_tries"
@@ -92,7 +94,7 @@ struct BoulderAscent: AscentRepresentable {
     let lowZone: Bool
     let points: Double
     let lowZoneTries: Int?
-    let modified: String
+    let modified: Date
     let status: String
 
     enum CodingKeys: String, CodingKey {
