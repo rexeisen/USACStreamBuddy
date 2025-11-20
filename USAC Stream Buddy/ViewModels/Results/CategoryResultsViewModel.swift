@@ -75,7 +75,7 @@ final class CategoryResultsViewModel {
 
             let discipline = self.categoryRound.discipline
             if discipline == .boulder {
-                try await self.handleBoulderingResponse(data: data)
+                _ = try await self.handleBoulderingResponse(data: data)
             } else if discipline == .lead {
                 try await self.handleLeadResponse(data: data)
             }
@@ -91,12 +91,14 @@ final class CategoryResultsViewModel {
         isFetching = false
     }
 
-    private func handleBoulderingResponse(data: Data) async throws {
+    func handleBoulderingResponse(data: Data) async throws -> [OnWall] {
         let result: GenericEventResultsResponse = try decoder.decode(
             GenericEventResultsResponse<BoulderAscent>.self,
             from: data
         )
 
+        var onWall: [OnWall] = []
+        
         let rankings = result.ranking
         // Go through each route and find the item that is active
         for route in categoryRound.routes {
@@ -122,17 +124,11 @@ final class CategoryResultsViewModel {
                 }
             }
             
-            let documentDirectory = URL.documentsDirectory
             let parsedKey = categoryRound.category + route.name
             
             if let lastActive = currentlyActive.last {
                 let value = "#\(lastActive.bib) \(lastActive.name)"
-                let resultPath = documentDirectory.appending(path: "\(parsedKey)Results.txt")
-                do {
-                    try value.description.write(to: resultPath, atomically: true, encoding: .utf8)
-                } catch {
-                    print(error.localizedDescription)
-                }
+                onWall.append(.init(route: parsedKey, name: value))
             } else {
                 // Get the next person from the startlist
                 // Step one is to get the last confirmed
@@ -164,29 +160,18 @@ final class CategoryResultsViewModel {
                     if startIndex + 1 < result.startlist.count {
                         let athlete = result.startlist[startIndex + 1]
                         let value = "#\(athlete.bib) \(athlete.name)"
-                        let resultPath = documentDirectory.appending(path: "\(parsedKey)Results.txt")
-                        do {
-                            try value.description.write(to: resultPath, atomically: true, encoding: .utf8)
-                        } catch {
-                            print(error.localizedDescription)
-                        }
+                        onWall.append(.init(route: parsedKey, name: value))
                     }
                     
                 } else if let athlete = result.startlist.first {
                     // Get the first person in the start list
                     let value = "#\(athlete.bib) \(athlete.name)"
-                    let resultPath = documentDirectory.appending(path: "\(parsedKey)Results.txt")
-                    do {
-                        try value.description.write(to: resultPath, atomically: true, encoding: .utf8)
-                    } catch {
-                        print(error.localizedDescription)
-                    }
+                    onWall.append(.init(route: parsedKey, name: value))
                 }
-                
-                
             }
         }
 
+        return onWall
     }
 
     private func handleLeadResponse(data: Data) async throws {
