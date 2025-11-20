@@ -27,7 +27,9 @@ final class RoundViewModel {
         var categoryResults: [CategoryResultsViewModel] = []
         for category in event.categories {
             for round in category.rounds where round.round == selectedRound {
-                categoryResults.append(CategoryResultsViewModel(categoryRound: round))
+                if round.discipline == .boulder {
+                    categoryResults.append(CategoryResultsViewModel(categoryRound: round))
+                }
             }
         }
         self.categoryResults = categoryResults
@@ -35,6 +37,7 @@ final class RoundViewModel {
     }
     
     func startTimer() {
+        categoryResults.forEach { $0.startTimer() }
     }
 }
 

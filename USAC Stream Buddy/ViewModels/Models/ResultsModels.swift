@@ -136,13 +136,27 @@ struct BoulderAscent: AscentRepresentable {
 // Convenience wrappers for decoding full responses per discipline
 struct LeadEventResultsResponse: Codable {
     let ranking: [LeadRankingEntry]
+    let startlist: [StartListEntry]
 }
 
 struct BoulderEventResultsResponse: Codable {
     let ranking: [BoulderRankingEntry]
+    let startlist: [StartListEntry]
 }
 
 struct GenericEventResultsResponse<T: AscentRepresentable>: Codable {
     let ranking: [RankingEntry<T>]
+    let startlist: [StartListEntry]
 }
 
+struct StartListEntry: Identifiable, Codable {
+    let id: Int
+    let bib: String
+    let name: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "athlete_id"
+        case bib
+        case name
+    }
+}

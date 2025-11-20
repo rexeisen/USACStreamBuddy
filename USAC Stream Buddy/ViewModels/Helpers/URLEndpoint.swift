@@ -31,12 +31,12 @@ enum URLEndpoint {
             // and
             // /api/v1/category_rounds/4050/results'
             // The latter is the one that has if the user is on the wall or not
-            components.path = "/api/v1/category_rounds/\(categoryId)/results'"
+            components.path = "/api/v1/category_rounds/\(categoryId)/results"
         }
         
         guard let endpoint = components.url else { throw EndpointError.malformedURL }
         var request = URLRequest(url: endpoint)
-        request.setValue("https://usac.results.info/", forHTTPHeaderField: "Referer")
+        request.setValue("https://usac.results.info", forHTTPHeaderField: "Referer")
         return request
     }
 }

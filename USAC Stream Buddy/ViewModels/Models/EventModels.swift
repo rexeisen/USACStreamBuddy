@@ -56,11 +56,9 @@ struct Route: Codable, Identifiable {
         case id
         case name
         case startListURL = "startlist"
-        case rankingURL = "ranking"
     }
     
     let id: Int
     let name: String
     let startListURL: String
-    let rankingURL: String
 }
