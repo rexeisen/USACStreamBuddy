@@ -7,16 +7,12 @@
 
 import Foundation
 
-// Common interface for ascent types in different disciplines
-protocol AscentRepresentable: Codable {
-    var routeID: Int { get }
-    var routeName: String { get }
-    var status: String { get }
-}
-
-
 // MARK: - Models for decoding the `ranking` key
-struct RankingEntry<Ascent: AscentRepresentable>: Codable, Identifiable {
+struct RankingEntry<Ascent: AscentRepresentable>: Codable, Identifiable,
+    CustomStringConvertible
+{
+    var description: String { "#\(bib) \(name)" }
+
     // Use athlete_id as a stable identifier
     var id: Int { athleteID }
 
@@ -43,12 +39,13 @@ struct RankingEntry<Ascent: AscentRepresentable>: Codable, Identifiable {
         case active
         case underAppeal = "under_appeal"
     }
-    
-    func ascent(routeId: Int, status: String? = nil) -> Ascent? {
-        guard let ascent = self.ascents.first(where: { $0.routeID == routeId }) else {
+
+    func ascent(routeId: Int, status: AscentStatus? = nil) -> Ascent? {
+        guard let ascent = self.ascents.first(where: { $0.routeID == routeId })
+        else {
             return nil
         }
-        
+
         if let status {
             if ascent.status == status {
                 return ascent
@@ -60,7 +57,6 @@ struct RankingEntry<Ascent: AscentRepresentable>: Codable, Identifiable {
         }
     }
 }
-
 
 /*
 "route_id":65681,
@@ -82,7 +78,7 @@ struct LeadAscent: AscentRepresentable {
     let correctiveRank: Int
     let modified: Date
     let score: String
-    let status: String
+    let status: AscentStatus
     let topTries: Int?
 
     enum CodingKeys: String, CodingKey {
@@ -111,7 +107,7 @@ struct BoulderAscent: AscentRepresentable {
     let points: Double
     let lowZoneTries: Int?
     let modified: Date
-    let status: String
+    let status: AscentStatus
 
     enum CodingKeys: String, CodingKey {
         case routeID = "route_id"
@@ -128,35 +124,53 @@ struct BoulderAscent: AscentRepresentable {
     }
 }
 
-// Concrete typealiases for common ranking entry usages
-// Use these when decoding lead and bouldering result lists
- typealias LeadRankingEntry = RankingEntry<LeadAscent>
- typealias BoulderRankingEntry = RankingEntry<BoulderAscent>
-
-// Convenience wrappers for decoding full responses per discipline
-struct LeadEventResultsResponse: Codable {
-    let ranking: [LeadRankingEntry]
-    let startlist: [StartListEntry]
-}
-
-struct BoulderEventResultsResponse: Codable {
-    let ranking: [BoulderRankingEntry]
-    let startlist: [StartListEntry]
-}
-
 struct GenericEventResultsResponse<T: AscentRepresentable>: Codable {
     let ranking: [RankingEntry<T>]
     let startlist: [StartListEntry]
+
+    func sorted(routeId: Int, status: AscentStatus? = nil) -> [RankingEntry<T>] {
+        var currentlyActive = self.ranking.filter {
+            $0.ascent(routeId: routeId, status: status) != nil
+        }
+        
+        // If this is a Lead event, do not sort; return the filtered list as-is
+        if T.self == LeadAscent.self {
+            return currentlyActive
+        }
+        
+        // We now want to sort these currently active routes by
+        // the ascent modified date
+        currentlyActive.sort { lhs, rhs in
+            let lAsc = lhs.ascent(routeId: routeId, status: status)
+            let rAsc = rhs.ascent(routeId: routeId, status: status)
+
+            switch (lAsc, rAsc) {
+            case let (l?, r?):
+                return l.modified < r.modified
+            case (nil, nil):
+                return false
+            case (_, nil):
+                return true
+            case (nil, _):
+                return false
+            }
+        }
+        
+        return currentlyActive
+    }
 }
 
-struct StartListEntry: Identifiable, Codable {
+struct StartListEntry: Identifiable, Codable, CustomStringConvertible {
+    var description: String { "#\(bib) \(name)" }
+
     let id: Int
     let bib: String
     let name: String
-    
+
     enum CodingKeys: String, CodingKey {
         case id = "athlete_id"
         case bib
         case name
     }
 }
+

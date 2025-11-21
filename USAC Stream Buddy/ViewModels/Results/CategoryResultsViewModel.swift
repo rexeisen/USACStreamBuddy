@@ -8,6 +8,10 @@
 import Combine
 import Foundation
 
+enum CategoryResultsViewModelError: Error {
+    case unknownFormat
+}
+
 @Observable
 final class CategoryResultsViewModel {
     let categoryRound: CategoryRound
@@ -18,7 +22,7 @@ final class CategoryResultsViewModel {
 
     @ObservationIgnored
     private var isFetching: Bool = false
-    
+
     init(categoryRound: CategoryRound) {
         self.categoryRound = categoryRound
 
@@ -27,7 +31,7 @@ final class CategoryResultsViewModel {
         df.timeZone = TimeZone(secondsFromGMT: 0)
         df.dateFormat = "yyyy-MM-dd HH:mm:ss XXX"
         decoder.dateDecodingStrategy = .formatted(df)
-        
+
     }
 
     deinit {
@@ -56,7 +60,7 @@ final class CategoryResultsViewModel {
             stopTimer()
             return
         }
-        
+
         // Prevent overlapping fetch cycles if one is still in progress
         if isFetching { return }
         isFetching = true
@@ -66,7 +70,7 @@ final class CategoryResultsViewModel {
             let (data, response) = try await URLSession.shared.data(
                 for: request
             )
-            
+
             guard let http = response as? HTTPURLResponse,
                 (200..<300).contains(http.statusCode)
             else {
@@ -74,13 +78,20 @@ final class CategoryResultsViewModel {
             }
 
             let discipline = self.categoryRound.discipline
+            let onWall: [OnWall]
             if discipline == .boulder {
-                _ = try await self.handleBoulderingResponse(data: data)
+                onWall = try await self.handleBoulderingResponse(data: data)
+
             } else if discipline == .lead {
                 try await self.handleLeadResponse(data: data)
+                onWall = []
+            } else {
+                throw CategoryResultsViewModelError.unknownFormat
             }
 
-            // Handle data/response as needed
+            for athlete in onWall {
+                athlete.commit()
+            }
         } catch {
             // Handle error as needed (log, retry, etc.)
             stopTimer()
@@ -98,75 +109,46 @@ final class CategoryResultsViewModel {
         )
 
         var onWall: [OnWall] = []
-        
-        let rankings = result.ranking
+
         // Go through each route and find the item that is active
         for route in categoryRound.routes {
-            var currentlyActive = rankings.filter {
-                $0.ascent(routeId: route.id, status: "active") != nil
-            }
-            
-            // We now want to sort these currently active routes by
-            // the ascent modified date
-            currentlyActive.sort { lhs, rhs in
-                let lAsc = lhs.ascent(routeId: route.id, status: "active")
-                let rAsc = rhs.ascent(routeId: route.id, status: "active")
+            let currentlyActive = result.sorted(
+                routeId: route.id,
+                status: .active
+            )
 
-                switch (lAsc, rAsc) {
-                case let (l?, r?):
-                    return l.modified < r.modified
-                case (nil, nil):
-                    return false
-                case (_, nil):
-                    return true
-                case (nil, _):
-                    return false
-                }
-            }
-            
             let parsedKey = categoryRound.category + route.name
-            
+
             if let lastActive = currentlyActive.last {
-                let value = "#\(lastActive.bib) \(lastActive.name)"
-                onWall.append(.init(route: parsedKey, name: value))
+                onWall.append(
+                    .init(route: parsedKey, name: lastActive.description)
+                )
             } else {
                 // Get the next person from the startlist
                 // Step one is to get the last confirmed
+                let currentlyActive = result.sorted(
+                    routeId: route.id,
+                    status: .confirmed
+                )
 
-                var currentlyActive = rankings.filter {
-                    $0.ascent(routeId: route.id, status: "confirmed") != nil
-                }
-                
-                // We now want to sort these currently active routes by
-                // the ascent modified date
-                currentlyActive.sort { lhs, rhs in
-                    let lAsc = lhs.ascent(routeId: route.id, status: "confirmed")
-                    let rAsc = rhs.ascent(routeId: route.id, status: "confirmed")
-
-                    switch (lAsc, rAsc) {
-                    case let (l?, r?):
-                        return l.modified < r.modified
-                    case (nil, nil):
-                        return false
-                    case (_, nil):
-                        return true
-                    case (nil, _):
-                        return false
-                    }
-                }
-                
-                if let lastConfirmed = currentlyActive.last, let startIndex = result.startlist.firstIndex(where: { $0.bib == lastConfirmed.bib }) {
+                if let lastConfirmed = currentlyActive.last,
+                    let startIndex = result.startlist.firstIndex(where: {
+                        $0.bib == lastConfirmed.bib
+                    })
+                {
                     // Get the person after the last active
                     if startIndex + 1 < result.startlist.count {
                         let athlete = result.startlist[startIndex + 1]
-                        let value = "#\(athlete.bib) \(athlete.name)"
-                        onWall.append(.init(route: parsedKey, name: value))
+                        onWall.append(
+                            .init(route: parsedKey, name: athlete.description)
+                        )
                     }
-                    
+
                 } else if let athlete = result.startlist.first {
                     // Get the first person in the start list
-                    let value = "#\(athlete.bib) \(athlete.name)"
-                    onWall.append(.init(route: parsedKey, name: value))
+                    onWall.append(
+                        .init(route: parsedKey, name: athlete.description)
+                    )
                 }
             }
         }
@@ -179,31 +161,5 @@ final class CategoryResultsViewModel {
         //            LeadEventResultsResponse.self,
         //            from: data
         //        )
-    }
-    
-    private func sortedData<T: AscentRepresentable>(result: GenericEventResultsResponse<T>, route: Route, key: String) -> [RankingEntry<T>]  {
-        []
-//        var currentlyActive = result.ranking.filter {
-//            $0.ascent(routeId: route.id, status: key) != nil
-//        }
-//        
-//        // We now want to sort these currently active routes by
-//        // the ascent modified date
-//        currentlyActive.sort { lhs, rhs in
-//            let lAsc = lhs.ascent(routeId: route.id, status: key)
-//            let rAsc = rhs.ascent(routeId: route.id, status: key)
-//
-//            switch (lAsc, rAsc) {
-//            case let (l?, r?):
-//                return l.modified < r.modified
-//            case (nil, nil):
-//                return false
-//            case (_, nil):
-//                return true
-//            case (nil, _):
-//                return false
-//            }
-//        }
-//        return currentlyActive
     }
 }
