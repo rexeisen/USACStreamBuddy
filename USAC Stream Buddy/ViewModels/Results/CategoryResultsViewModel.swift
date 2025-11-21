@@ -81,10 +81,8 @@ final class CategoryResultsViewModel {
             let onWall: [OnWall]
             if discipline == .boulder {
                 onWall = try await self.handleBoulderingResponse(data: data)
-
             } else if discipline == .lead {
-                try await self.handleLeadResponse(data: data)
-                onWall = []
+                onWall = try await self.handleLeadResponse(data: data)
             } else {
                 throw CategoryResultsViewModelError.unknownFormat
             }
@@ -108,6 +106,20 @@ final class CategoryResultsViewModel {
             from: data
         )
 
+        return try await genericOnWallResponse(result: result)
+    }
+    
+    private func handleLeadResponse(data: Data) async throws -> [OnWall] {
+        let result: GenericEventResultsResponse = try decoder.decode(
+            GenericEventResultsResponse<LeadAscent>.self,
+            from: data
+        )
+
+        return try await genericOnWallResponse(result: result)
+    }
+    
+    func genericOnWallResponse<T: AscentRepresentable>(result: GenericEventResultsResponse<T>) async throws -> [OnWall] {
+        
         var onWall: [OnWall] = []
 
         // Go through each route and find the item that is active
@@ -154,12 +166,5 @@ final class CategoryResultsViewModel {
         }
 
         return onWall
-    }
-
-    private func handleLeadResponse(data: Data) async throws {
-        //        let result = try decoder.decode(
-        //            LeadEventResultsResponse.self,
-        //            from: data
-        //        )
     }
 }
