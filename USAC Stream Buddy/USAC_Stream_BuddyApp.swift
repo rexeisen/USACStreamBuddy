@@ -13,5 +13,8 @@ struct USAC_Stream_BuddyApp: App {
         WindowGroup {
             ContentView()
         }
+        .commands {
+            UtilitiesCommands()
+        }
     }
 }

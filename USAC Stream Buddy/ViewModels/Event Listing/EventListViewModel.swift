@@ -38,9 +38,17 @@ final class EventListViewModel {
 
             let decoder = JSONDecoder()
             let listing = try decoder.decode(EventListing.self, from: data)
-            state = .loaded(listing.events)
+            // Filter out events whose start date is more than 4 days in the past
+            let now = Date()
+            let cutoff = Calendar.current.date(byAdding: .day, value: -4, to: now) ?? now
+            let upcoming = listing.events.filter { event in
+                // Assuming EventSummary has a `startDate` property of type Date
+                return event.starts_at >= cutoff
+            }
+            state = .loaded(upcoming)
         } catch {
             state = .failed(error)
         }
     }
 }
+
