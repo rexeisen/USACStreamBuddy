@@ -75,8 +75,7 @@ struct LeadAscent: AscentRepresentable {
     let top: Bool
     let plus: Bool
     let rank: Int
-    let correctiveRank: Int
-    let modified: Date
+    let correctiveRank: Double
     let score: String
     let status: AscentStatus
     let topTries: Int?
@@ -88,7 +87,6 @@ struct LeadAscent: AscentRepresentable {
         case plus
         case rank
         case correctiveRank = "corrective_rank"
-        case modified
         case score
         case status
         case topTries = "top_tries"
@@ -132,27 +130,49 @@ struct GenericEventResultsResponse<T: AscentRepresentable>: Codable {
         var currentlyActive = self.ranking.filter {
             $0.ascent(routeId: routeId, status: status) != nil
         }
-        
+                
         // If this is a Lead event, do not sort; return the filtered list as-is
         if T.self == LeadAscent.self {
-            return currentlyActive
-        }
-        
-        // We now want to sort these currently active routes by
-        // the ascent modified date
-        currentlyActive.sort { lhs, rhs in
-            let lAsc = lhs.ascent(routeId: routeId, status: status)
-            let rAsc = rhs.ascent(routeId: routeId, status: status)
+            // Lead doesn't have a proper modified date so sort by start list
+            let sortedStartList = self.startlist.sorted { lhs, rhs in
+                let lhsPosition: Int = lhs.startPositions.filter { $0.routeId == routeId }.first?.position ?? 0
+                let rhsPosition: Int = rhs.startPositions.filter { $0.routeId == routeId }.first?.position ?? 0
+                
+                return lhsPosition < rhsPosition
+            }
+            
+            currentlyActive.sort { lhs, rhs in
+                let lIndex = sortedStartList.firstIndex(where: { $0.bib == lhs.bib })
+                let rIndex = sortedStartList.firstIndex(where: { $0.bib == rhs.bib })
+                
+                switch (lIndex, rIndex) {
+                case let (l?, r?):
+                    return l < r
+                case (nil, nil):
+                    return false
+                case (_, nil):
+                    return true
+                case (nil, _):
+                    return false
+                }
+            }
+        } else {
+            // We now want to sort these currently active routes by
+            // the ascent modified date
+            currentlyActive.sort { lhs, rhs in
+                let lAsc = lhs.ascent(routeId: routeId, status: status)
+                let rAsc = rhs.ascent(routeId: routeId, status: status)
 
-            switch (lAsc, rAsc) {
-            case let (l?, r?):
-                return l.modified < r.modified
-            case (nil, nil):
-                return false
-            case (_, nil):
-                return true
-            case (nil, _):
-                return false
+                switch (lAsc, rAsc) {
+                case let (l?, r?):
+                    return l.modified < r.modified
+                case (nil, nil):
+                    return false
+                case (_, nil):
+                    return true
+                case (nil, _):
+                    return false
+                }
             }
         }
         
@@ -160,17 +180,50 @@ struct GenericEventResultsResponse<T: AscentRepresentable>: Codable {
     }
 }
 
+/*
+ "route_start_positions":[
+             {
+                "route_name":"1",
+                "route_id":65681,
+                "position":30
+             },
+             {
+                "route_name":"2",
+                "route_id":65682,
+                "position":10
+             },
+             {
+                "route_name":"3",
+                "route_id":65683,
+                "position":20
+             }
+          ],
+ */
+
 struct StartListEntry: Identifiable, Codable, CustomStringConvertible {
     var description: String { "#\(bib) \(name)" }
 
     let id: Int
     let bib: String
     let name: String
-
+    let startPositions: [StartListRoutePosition]
+    
     enum CodingKeys: String, CodingKey {
         case id = "athlete_id"
         case bib
         case name
+        case startPositions = "route_start_positions"
     }
 }
 
+struct StartListRoutePosition: Identifiable, Codable {
+    let id: String
+    let routeId: Int
+    let position: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "route_name"
+        case routeId = "route_id"
+        case position
+    }
+}

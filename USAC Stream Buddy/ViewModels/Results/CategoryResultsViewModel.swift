@@ -109,7 +109,7 @@ final class CategoryResultsViewModel {
         return try await genericOnWallResponse(result: result)
     }
     
-    private func handleLeadResponse(data: Data) async throws -> [OnWall] {
+    func handleLeadResponse(data: Data) async throws -> [OnWall] {
         let result: GenericEventResultsResponse = try decoder.decode(
             GenericEventResultsResponse<LeadAscent>.self,
             from: data
@@ -124,6 +124,9 @@ final class CategoryResultsViewModel {
 
         // Go through each route and find the item that is active
         for route in categoryRound.routes {
+            if route.id == 65682 {
+                debugPrint("HO")
+            }
             let currentlyActive = result.sorted(
                 routeId: route.id,
                 status: .active
