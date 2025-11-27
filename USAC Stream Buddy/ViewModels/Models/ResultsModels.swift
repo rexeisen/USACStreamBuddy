@@ -56,6 +56,11 @@ struct RankingEntry<Ascent: AscentRepresentable>: Codable, Identifiable,
             return ascent
         }
     }
+    
+    /// The representation of the ascents in TZL0P format
+    var scoreRepresentation: String? {
+        return ascents.compactMap{ $0.scoreRepresentation }.joined(separator: "")
+    }
 }
 
 /*
@@ -74,7 +79,7 @@ struct LeadAscent: AscentRepresentable {
     let routeName: String
     let top: Bool
     let plus: Bool
-    let rank: Int
+    let rank: Int?
     let correctiveRank: Double
     let score: String
     let status: AscentStatus
@@ -90,8 +95,9 @@ struct LeadAscent: AscentRepresentable {
         case score
         case status
         case topTries = "top_tries"
-
     }
+    
+    
 }
 
 struct BoulderAscent: AscentRepresentable {
@@ -119,6 +125,21 @@ struct BoulderAscent: AscentRepresentable {
         case lowZoneTries = "low_zone_tries"
         case modified
         case status
+    }
+    
+    var scoreRepresentation: String? {
+        if top {
+            return "T"
+        } else if zone {
+            return "Z"
+        } else if lowZone {
+            return "L"
+        } else if status == .pending {
+            return "P"
+        } else {
+            // Covers active or confirmed
+            return "0"
+        }
     }
 }
 

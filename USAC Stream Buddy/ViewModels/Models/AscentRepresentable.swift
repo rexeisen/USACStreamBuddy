@@ -13,10 +13,15 @@ protocol AscentRepresentable: Codable {
     var routeName: String { get }
     var status: AscentStatus { get }
     var modified: Date { get }
+    var scoreRepresentation: String? { get }
 }
 
 extension AscentRepresentable {
     var modified: Date {
         Date(timeIntervalSinceReferenceDate: 0)
+    }
+    
+    var scoreRepresentation: String? {
+        return nil
     }
 }

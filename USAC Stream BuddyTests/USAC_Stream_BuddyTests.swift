@@ -36,7 +36,11 @@ private func jsonData(resource: String) -> Data {
     }
 }
 
-private func makeViewModel(routes: [Int]) -> CategoryResultsViewModel {
+private func makeViewModel(
+    routes: [Int],
+    category: String,
+    discipline: Discipline
+) -> CategoryResultsViewModel {
     let routes: [Route] =
         routes
         .enumerated()
@@ -45,10 +49,10 @@ private func makeViewModel(routes: [Int]) -> CategoryResultsViewModel {
         }
     let round = CategoryRound(
         id: 4586,
-        discipline: .boulder,
+        discipline: discipline,
         round: .final,
         status: "active",
-        category: "F17",
+        category: category,
         routes: routes
     )
     return CategoryResultsViewModel(categoryRound: round)
@@ -60,27 +64,45 @@ struct USAC_Stream_BuddyTests {
     @Test(
         "handleBoulderingResponse returns expected OnWall entries for active athletes"
     )
+    @MainActor
     func testHandleBoulderingResponse() async throws {
-        let vm = makeViewModel(routes: [
-            113328, 113329, 113330, 113331, 113332, 113338, 113339, 113342,
-        ])
+        let vm = makeViewModel(
+            routes: [
+                113328, 113329, 113330, 113331, 113332, 113338, 113339, 113342,
+            ],
+            category: "F17",
+            discipline: .boulder
+        )
         let onWall = try await vm._test_handleBoulderingResponse(
             data: jsonData(resource: "boulder-response-1")
         )
-        let dict: [String: String] = Dictionary(
-            uniqueKeysWithValues: onWall.map { ($0.route, $0.name) }
+        let dict: [String: OnWall] = Dictionary(
+            uniqueKeysWithValues: onWall.map { ($0.route, $0) }
         )
-        #expect(dict["F174"] == "#101 Rexeisen Anna")
-        #expect(dict["F173"] == "#102 KNIGHTS Penny")
-        #expect(dict["F172"] == "#103 WACHTER Olivia")
-        #expect(dict["F171"] == "#104 MCINTOSH Lauren")
+        #expect(dict["F171"]?.name == "#104 MCINTOSH Lauren")
+        #expect(dict["F172"]?.name == "#103 WACHTER Olivia")
+        #expect(dict["F173"]?.name == "#102 KNIGHTS Penny")
+        #expect(dict["F174"]?.name == "#101 Rexeisen Anna")
+        #expect(dict["F175"]?.name == "#101 REXEISEN Anna")
+        
+        // Now we check the scores
+        #expect(dict["F171"]?.score == "LPPPPPPP")
+        #expect(dict["F172"]?.score == "0ZPPPPPP")
+        #expect(dict["F173"]?.score == "ZTZPPPPP")
+        #expect(dict["F174"]?.score == "TTZLPPPP")
+        #expect(dict["F175"]?.score == "TTZLPPPP")
     }
 
     @Test(
-        "handleLeadResponse returns expected OnWall entries for active athletes"
+        "handleLeadResponse returns expected OnWall entries for active athletes real event"
     )
-    func testLeadBoulderingResponse() async throws {
-        let vm = makeViewModel(routes: [65681, 65682, 65683])
+    @MainActor
+    func testLeadRealResponse() async throws {
+        let vm = makeViewModel(
+            routes: [65681, 65682, 65683],
+            category: "F17",
+            discipline: .lead
+        )
         let onWall = try await vm._test_handleLeadResponse(
             data: jsonData(resource: "lead-response-1")
         )
@@ -92,4 +114,28 @@ struct USAC_Stream_BuddyTests {
         #expect(dict["F171"] == "#1403 ROSS Eliza")
         #expect(dict["F172"] == "#1415 CHOI Katherine")
     }
+
+    @Test(
+        "handleLeadResponse test event"
+    )
+    @MainActor
+    func testLeadTestResponse() async throws {
+        let vm = makeViewModel(
+            routes: [
+                68910, 68911, 68912,
+            ],
+            category: "M19",
+            discipline: .lead
+        )
+        let onWall = try await vm._test_handleLeadResponse(
+            data: jsonData(resource: "lead-response-test-event")
+        )
+        let dict: [String: String] = Dictionary(
+            uniqueKeysWithValues: onWall.map { ($0.route, $0.name) }
+        )
+        #expect(dict["M191"] == "#2 KRAJNIK Logan")
+        #expect(dict["M192"] == "#3 PHAM Owen")
+        #expect(dict["M193"] == "#3 PHAM Owen")
+    }
 }
+

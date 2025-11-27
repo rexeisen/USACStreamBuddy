@@ -108,7 +108,7 @@ final class CategoryResultsViewModel {
 
         return try await genericOnWallResponse(result: result)
     }
-    
+
     func handleLeadResponse(data: Data) async throws -> [OnWall] {
         let result: GenericEventResultsResponse = try decoder.decode(
             GenericEventResultsResponse<LeadAscent>.self,
@@ -117,16 +117,15 @@ final class CategoryResultsViewModel {
 
         return try await genericOnWallResponse(result: result)
     }
-    
-    func genericOnWallResponse<T: AscentRepresentable>(result: GenericEventResultsResponse<T>) async throws -> [OnWall] {
-        
+
+    func genericOnWallResponse<T: AscentRepresentable>(
+        result: GenericEventResultsResponse<T>
+    ) async throws -> [OnWall] {
+
         var onWall: [OnWall] = []
 
         // Go through each route and find the item that is active
         for route in categoryRound.routes {
-            if route.id == 65682 {
-                debugPrint("HO")
-            }
             let currentlyActive = result.sorted(
                 routeId: route.id,
                 status: .active
@@ -136,7 +135,11 @@ final class CategoryResultsViewModel {
 
             if let lastActive = currentlyActive.last {
                 onWall.append(
-                    .init(route: parsedKey, name: lastActive.description)
+                    .init(
+                        route: parsedKey,
+                        name: lastActive.description,
+                        score: lastActive.scoreRepresentation
+                    )
                 )
             } else {
                 // Get the next person from the startlist
@@ -149,20 +152,33 @@ final class CategoryResultsViewModel {
                 if let lastConfirmed = currentlyActive.last,
                     let startIndex = result.startlist.firstIndex(where: {
                         $0.bib == lastConfirmed.bib
-                    })
+                    }),
+                    startIndex + 1 < result.startlist.count,
+                   let ranking = result.ranking.first(where: {
+                    $0.bib == result.startlist[startIndex + 1].bib
+                })
                 {
                     // Get the person after the last active
-                    if startIndex + 1 < result.startlist.count {
-                        let athlete = result.startlist[startIndex + 1]
-                        onWall.append(
-                            .init(route: parsedKey, name: athlete.description)
-                        )
-                    }
+                    let athlete = result.startlist[startIndex + 1]
+                    // Get the ranking entry for the athlete
+                    // for the score
+
+                    onWall.append(
+                        .init(route: parsedKey, name: athlete.description, score: ranking.scoreRepresentation)
+                    )
 
                 } else if let athlete = result.startlist.first {
+                    var scoreRepresentation: String?
+                    
+                    if let ranking = result.ranking.first(where: {
+                        $0.bib == athlete.bib
+                    }) {
+                        scoreRepresentation = ranking.scoreRepresentation
+                    }
+                    
                     // Get the first person in the start list
                     onWall.append(
-                        .init(route: parsedKey, name: athlete.description)
+                        .init(route: parsedKey, name: athlete.description, score: scoreRepresentation)
                     )
                 }
             }

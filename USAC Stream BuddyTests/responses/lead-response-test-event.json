@@ -1,0 +1,276 @@
+{
+  "id": 4180,
+  "event": "R61 Training Event",
+  "event_id": 117,
+  "dcat_id": 176,
+  "discipline": "Lead",
+  "status": "active",
+  "status_as_of": "2025-11-11 23:40:18 UTC",
+  "category": "M19",
+  "round": "Final",
+  "format": "Custom: 3+ routes, IFSC scoring",
+  "routes": [
+    {
+      "id": 68910,
+      "name": "1",
+      "startlist": "/api/v1/routes/68910/startlist",
+      "ranking": "/api/v1/routes/68910/results"
+    },
+    {
+      "id": 68911,
+      "name": "2",
+      "startlist": "/api/v1/routes/68911/startlist",
+      "ranking": "/api/v1/routes/68911/results"
+    },
+    {
+      "id": 68912,
+      "name": "3",
+      "startlist": "/api/v1/routes/68912/startlist",
+      "ranking": "/api/v1/routes/68912/results"
+    }
+  ],
+  "ranking": [
+    {
+      "athlete_id": 4672,
+      "name": "KRAJNIK Aiden",
+      "firstname": "Aiden",
+      "lastname": "KRAJNIK",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null,
+      "bib": "1",
+      "rank": 1,
+      "score": "1.59",
+      "ascents": [
+        {
+          "route_id": 68910,
+          "route_name": "1",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 1,
+          "corrective_rank": 1,
+          "score": "20",
+          "status": "confirmed",
+          "top_tries": null
+        },
+        {
+          "route_id": 68911,
+          "route_name": "2",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": null,
+          "corrective_rank": 2.0,
+          "score": "",
+          "status": "pending",
+          "top_tries": null
+        },
+        {
+          "route_id": 68912,
+          "route_name": "3",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 2,
+          "corrective_rank": 2,
+          "score": "10",
+          "status": "active",
+          "top_tries": null
+        }
+      ],
+      "combined_stages": null,
+      "active": true,
+      "under_appeal": false
+    },
+    {
+      "athlete_id": 4674,
+      "name": "KRAJNIK Logan",
+      "firstname": "Logan",
+      "lastname": "KRAJNIK",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null,
+      "bib": "2",
+      "rank": 2,
+      "score": "1.82",
+      "ascents": [
+        {
+          "route_id": 68910,
+          "route_name": "1",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": null,
+          "corrective_rank": 3,
+          "score": "",
+          "status": "active",
+          "top_tries": null
+        },
+        {
+          "route_id": 68911,
+          "route_name": "2",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": null,
+          "corrective_rank": 2.0,
+          "score": "",
+          "status": "active",
+          "top_tries": null
+        },
+        {
+          "route_id": 68912,
+          "route_name": "3",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 1,
+          "corrective_rank": 1,
+          "score": "20",
+          "status": "active",
+          "top_tries": null
+        }
+      ],
+      "combined_stages": null,
+      "active": true,
+      "under_appeal": false
+    },
+    {
+      "athlete_id": 7683,
+      "name": "PHAM Owen",
+      "firstname": "Owen",
+      "lastname": "PHAM",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null,
+      "bib": "3",
+      "rank": 3,
+      "score": "2.29",
+      "ascents": [
+        {
+          "route_id": 68910,
+          "route_name": "1",
+          "top": false,
+          "plus": true,
+          "restarted": false,
+          "rank": 2,
+          "corrective_rank": 2,
+          "score": "10+",
+          "status": "confirmed",
+          "top_tries": null
+        },
+        {
+          "route_id": 68911,
+          "route_name": "2",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": null,
+          "corrective_rank": 2.0,
+          "score": "",
+          "status": "active",
+          "top_tries": null
+        },
+        {
+          "route_id": 68912,
+          "route_name": "3",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": null,
+          "corrective_rank": 3,
+          "score": "",
+          "status": "active",
+          "top_tries": null
+        }
+      ],
+      "combined_stages": null,
+      "active": true,
+      "under_appeal": false
+    }
+  ],
+  "startlist": [
+    {
+      "athlete_id": 4672,
+      "route_start_positions": [
+        {
+          "route_name": "1",
+          "route_id": 68910,
+          "position": 2
+        },
+        {
+          "route_name": "2",
+          "route_id": 68911,
+          "position": 3
+        },
+        {
+          "route_name": "3",
+          "route_id": 68912,
+          "position": 1
+        }
+      ],
+      "name": "KRAJNIK Aiden",
+      "firstname": "Aiden",
+      "lastname": "KRAJNIK",
+      "bib": "1",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null
+    },
+    {
+      "athlete_id": 4674,
+      "route_start_positions": [
+        {
+          "route_name": "1",
+          "route_id": 68910,
+          "position": 3
+        },
+        {
+          "route_name": "2",
+          "route_id": 68911,
+          "position": 1
+        },
+        {
+          "route_name": "3",
+          "route_id": 68912,
+          "position": 2
+        }
+      ],
+      "name": "KRAJNIK Logan",
+      "firstname": "Logan",
+      "lastname": "KRAJNIK",
+      "bib": "2",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null
+    },
+    {
+      "athlete_id": 7683,
+      "route_start_positions": [
+        {
+          "route_name": "1",
+          "route_id": 68910,
+          "position": 1
+        },
+        {
+          "route_name": "2",
+          "route_id": 68911,
+          "position": 2
+        },
+        {
+          "route_name": "3",
+          "route_id": 68912,
+          "position": 3
+        }
+      ],
+      "name": "PHAM Owen",
+      "firstname": "Owen",
+      "lastname": "PHAM",
+      "bib": "3",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null
+    }
+  ]
+}
