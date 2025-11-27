@@ -137,7 +137,8 @@ final class CategoryResultsViewModel {
                 onWall.append(
                     .init(
                         route: parsedKey,
-                        name: lastActive.description,
+                        bib: lastActive.bib,
+                        name: lastActive.name,
                         score: lastActive.scoreRepresentation
                     )
                 )
@@ -154,9 +155,9 @@ final class CategoryResultsViewModel {
                         $0.bib == lastConfirmed.bib
                     }),
                     startIndex + 1 < result.startlist.count,
-                   let ranking = result.ranking.first(where: {
-                    $0.bib == result.startlist[startIndex + 1].bib
-                })
+                    let ranking = result.ranking.first(where: {
+                        $0.bib == result.startlist[startIndex + 1].bib
+                    })
                 {
                     // Get the person after the last active
                     let athlete = result.startlist[startIndex + 1]
@@ -164,21 +165,31 @@ final class CategoryResultsViewModel {
                     // for the score
 
                     onWall.append(
-                        .init(route: parsedKey, name: athlete.description, score: ranking.scoreRepresentation)
+                        .init(
+                            route: parsedKey,
+                            bib: athlete.bib,
+                            name: athlete.name,
+                            score: ranking.scoreRepresentation
+                        )
                     )
 
                 } else if let athlete = result.startlist.first {
                     var scoreRepresentation: String?
-                    
+
                     if let ranking = result.ranking.first(where: {
                         $0.bib == athlete.bib
                     }) {
                         scoreRepresentation = ranking.scoreRepresentation
                     }
-                    
+
                     // Get the first person in the start list
                     onWall.append(
-                        .init(route: parsedKey, name: athlete.description, score: scoreRepresentation)
+                        .init(
+                            route: parsedKey,
+                            bib: athlete.bib,
+                            name: athlete.name,
+                            score: scoreRepresentation
+                        )
                     )
                 }
             }

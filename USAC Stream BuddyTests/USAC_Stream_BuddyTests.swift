@@ -79,11 +79,11 @@ struct USAC_Stream_BuddyTests {
         let dict: [String: OnWall] = Dictionary(
             uniqueKeysWithValues: onWall.map { ($0.route, $0) }
         )
-        #expect(dict["F171"]?.name == "#104 MCINTOSH Lauren")
-        #expect(dict["F172"]?.name == "#103 WACHTER Olivia")
-        #expect(dict["F173"]?.name == "#102 KNIGHTS Penny")
-        #expect(dict["F174"]?.name == "#101 Rexeisen Anna")
-        #expect(dict["F175"]?.name == "#101 REXEISEN Anna")
+        #expect(dict["F171"]?.debugDescription == "#104 MCINTOSH Lauren")
+        #expect(dict["F172"]?.debugDescription == "#103 WACHTER Olivia")
+        #expect(dict["F173"]?.debugDescription == "#102 KNIGHTS Penny")
+        #expect(dict["F174"]?.debugDescription == "#101 Rexeisen Anna")
+        #expect(dict["F175"]?.debugDescription == "#101 REXEISEN Anna")
         
         // Now we check the scores
         #expect(dict["F171"]?.score == "LPPPPPPP")
@@ -107,7 +107,7 @@ struct USAC_Stream_BuddyTests {
             data: jsonData(resource: "lead-response-1")
         )
         let dict: [String: String] = Dictionary(
-            uniqueKeysWithValues: onWall.map { ($0.route, $0.name) }
+            uniqueKeysWithValues: onWall.map { ($0.route, $0.debugDescription) }
         )
 
         // These haven't started yet
@@ -131,7 +131,7 @@ struct USAC_Stream_BuddyTests {
             data: jsonData(resource: "lead-response-test-event")
         )
         let dict: [String: String] = Dictionary(
-            uniqueKeysWithValues: onWall.map { ($0.route, $0.name) }
+            uniqueKeysWithValues: onWall.map { ($0.route, $0.debugDescription) }
         )
         #expect(dict["M191"] == "#2 KRAJNIK Logan")
         #expect(dict["M192"] == "#3 PHAM Owen")
