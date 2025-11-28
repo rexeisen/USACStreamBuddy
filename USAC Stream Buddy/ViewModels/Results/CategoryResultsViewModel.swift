@@ -24,6 +24,7 @@ final class CategoryResultsViewModel {
     private var isFetching: Bool = false
 
     init(categoryRound: CategoryRound) {
+        print("\(URL.documentsDirectory)")
         self.categoryRound = categoryRound
 
         let df = DateFormatter()
@@ -144,23 +145,22 @@ final class CategoryResultsViewModel {
                 )
             } else {
                 // Get the next person from the startlist
-                // Step one is to get the last confirmed
-                let currentlyActive = result.sorted(
+                // Step one is to get the last confirmed                
+                let currentlyPending = result.sorted(
                     routeId: route.id,
-                    status: .confirmed
+                    status: .pending
                 )
-
-                if let lastConfirmed = currentlyActive.last,
+                
+                if let firstPending = currentlyPending.first,
                     let startIndex = result.startlist.firstIndex(where: {
-                        $0.bib == lastConfirmed.bib
+                        $0.bib == firstPending.bib
                     }),
-                    startIndex + 1 < result.startlist.count,
                     let ranking = result.ranking.first(where: {
-                        $0.bib == result.startlist[startIndex + 1].bib
+                        $0.bib == result.startlist[startIndex].bib
                     })
                 {
                     // Get the person after the last active
-                    let athlete = result.startlist[startIndex + 1]
+                    let athlete = result.startlist[startIndex]
                     // Get the ranking entry for the athlete
                     // for the score
 

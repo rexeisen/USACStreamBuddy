@@ -92,6 +92,28 @@ struct USAC_Stream_BuddyTests {
         #expect(dict["F174"]?.score == "TTZLPPPP")
         #expect(dict["F175"]?.score == "TTZLPPPP")
     }
+    
+    @Test(
+        "handleBoulderingResponse returns expected OnWall entries for active athletes"
+    )
+    @MainActor
+    func testHandleBoulderingConfirmedResponse() async throws {
+        let vm = makeViewModel(
+            routes: [
+                113328, 113329, 113330, 113331, 113332, 113338, 113339, 113342,
+            ],
+            category: "F17",
+            discipline: .boulder
+        )
+        let onWall = try await vm._test_handleBoulderingResponse(
+            data: jsonData(resource: "boulder-response-2")
+        )
+        let dict: [String: OnWall] = Dictionary(
+            uniqueKeysWithValues: onWall.map { ($0.route, $0) }
+        )
+        #expect(dict["F175"]?.bib == "104")
+        #expect(dict["F175"]?.name == "MCINTOSH Lauren")
+    }
 
     @Test(
         "handleLeadResponse returns expected OnWall entries for active athletes real event"
