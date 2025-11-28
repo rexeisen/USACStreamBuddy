@@ -97,6 +97,29 @@ struct USAC_Stream_BuddyTests {
         "handleBoulderingResponse returns expected OnWall entries for active athletes"
     )
     @MainActor
+    func testHandleBoulderingDNSResponse() async throws {
+        let vm = makeViewModel(
+            routes: [
+                113328, 113329, 113330, 113331, 113332, 113338, 113339, 113342,
+            ],
+            category: "F17",
+            discipline: .boulder
+        )
+        let onWall = try await vm._test_handleBoulderingResponse(
+            data: jsonData(resource: "boulder-response-dns")
+        )
+        let dict: [String: OnWall] = Dictionary(
+            uniqueKeysWithValues: onWall.map { ($0.route, $0) }
+        )
+        #expect(dict["F171"]?.debugDescription == "#102 KNIGHTS Penny")
+        #expect(dict["F172"]?.debugDescription == "#102 KNIGHTS Penny")
+        #expect(dict["F173"]?.debugDescription == "#102 KNIGHTS Penny")
+    }
+    
+    @Test(
+        "handleBoulderingResponse returns expected OnWall entries with a scratch"
+    )
+    @MainActor
     func testHandleBoulderingConfirmedResponse() async throws {
         let vm = makeViewModel(
             routes: [

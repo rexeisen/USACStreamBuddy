@@ -21,7 +21,7 @@ struct RankingEntry<Ascent: AscentRepresentable>: Codable, Identifiable,
     let firstname: String
     let lastname: String
     let bib: String
-    let rank: Int
+    let rank: Int?
     let score: String
     let ascents: [Ascent]
     let active: Bool
@@ -41,6 +41,9 @@ struct RankingEntry<Ascent: AscentRepresentable>: Codable, Identifiable,
     }
 
     func ascent(routeId: Int, status: AscentStatus? = nil) -> Ascent? {
+//        // DNS is a scratch, so don’t return this user
+        guard score != "DNS" else { return nil }
+        
         guard let ascent = self.ascents.first(where: { $0.routeID == routeId })
         else {
             return nil
