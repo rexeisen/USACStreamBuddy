@@ -124,6 +124,16 @@ final class CategoryResultsViewModel {
     ) async throws -> [OnWall] {
 
         var onWall: [OnWall] = []
+        
+        // We need to deal with DNS / Scratch
+        // Remove them from the start list
+        var startlist = result.startlist
+        let scratchList = result.ranking.filter {
+            $0.score == "DNS"
+        }
+        for scratch in scratchList {
+            startlist.removeAll { $0.bib == scratch.bib }
+        }
 
         // Go through each route and find the item that is active
         for route in categoryRound.routes {
@@ -152,11 +162,11 @@ final class CategoryResultsViewModel {
                 )
                 
                 if let firstPending = currentlyPending.first,
-                    let startIndex = result.startlist.firstIndex(where: {
+                    let startIndex = startlist.firstIndex(where: {
                         $0.bib == firstPending.bib
                     }),
                     let ranking = result.ranking.first(where: {
-                        $0.bib == result.startlist[startIndex].bib
+                        $0.bib == startlist[startIndex].bib
                     })
                 {
                     // Get the person after the last active
@@ -173,7 +183,7 @@ final class CategoryResultsViewModel {
                         )
                     )
 
-                } else if let athlete = result.startlist.first {
+                } else if let athlete = startlist.first {
                     var scoreRepresentation: String?
 
                     if let ranking = result.ranking.first(where: {
