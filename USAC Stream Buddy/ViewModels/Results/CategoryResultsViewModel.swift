@@ -13,7 +13,7 @@ enum CategoryResultsViewModelError: Error {
 }
 
 @Observable
-final class CategoryResultsViewModel {
+final class CategoryResultsViewModel: Identifiable {
     let categoryRound: CategoryRound
     private let decoder = JSONDecoder()
 
@@ -22,6 +22,10 @@ final class CategoryResultsViewModel {
 
     @ObservationIgnored
     private var isFetching: Bool = false
+    
+    var lastFetch: String
+    
+    var id: Int { categoryRound.id }
 
     init(categoryRound: CategoryRound) {
         print("\(URL.documentsDirectory)")
@@ -33,6 +37,7 @@ final class CategoryResultsViewModel {
         df.dateFormat = "yyyy-MM-dd HH:mm:ss XXX"
         decoder.dateDecodingStrategy = .formatted(df)
 
+        lastFetch = "Never"
     }
 
     deinit {
@@ -91,13 +96,17 @@ final class CategoryResultsViewModel {
             for athlete in onWall {
                 athlete.commit()
             }
+            
+            // Reset fetching state on the main actor
+            lastFetch = Date().formatted(date: .omitted, time: .standard)
         } catch {
             // Handle error as needed (log, retry, etc.)
             stopTimer()
             print("Error fetching results: \(error)")
+            print("Request: \(request)")
+            lastFetch = error.localizedDescription
         }
 
-        // Reset fetching state on the main actor
         isFetching = false
     }
 

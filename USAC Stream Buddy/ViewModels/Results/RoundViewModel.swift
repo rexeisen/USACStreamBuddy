@@ -33,11 +33,14 @@ final class RoundViewModel {
             }
         }
         self.categoryResults = categoryResults
-        startTimer()
     }
     
     func startTimer() {
         categoryResults.forEach { $0.startTimer() }
+    }
+    
+    func stopTimer() {
+        categoryResults.forEach { $0.stopTimer() }
     }
 }
 

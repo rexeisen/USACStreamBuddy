@@ -9,11 +9,12 @@ import SwiftUI
 
 struct EventDetailsView: View {
     @State private var viewModel: RoundViewModel
-    
+    @State private var isTimerOn: Bool = false
+
     init(event: Event) {
         viewModel = RoundViewModel(event: event, round: .final)
     }
-    
+
     var body: some View {
         Form {
             Section {
@@ -24,11 +25,38 @@ struct EventDetailsView: View {
                 }
             }
             Section {
-                Button("Start Timer") {
+                Button("Load Round") {
                     viewModel.processData()
                 }
-                .buttonStyle(.borderedProminent)
                 .frame(maxWidth: .infinity, alignment: .center)
+
+                Toggle(isOn: $isTimerOn) {
+                    Text(isTimerOn ? "Timer On" : "Timer Off")
+                }
+                .onChange(of: isTimerOn) { _, newValue in
+                    if newValue {
+                        viewModel.startTimer()
+                    } else {
+                        viewModel.stopTimer()
+                    }
+                }
+            }
+            Section("Loaded Round") {
+                if viewModel.categoryResults.isEmpty {
+                    ContentUnavailableView(
+                        "No category results loaded yet",
+                        systemImage: "circle.dotted"
+                    )
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                } else {
+                    // Table with rows: Category, Round, Last Updated
+                    
+                    Table(viewModel.categoryResults) {
+                        TableColumn("Category", value: \.categoryRound.category)
+                        TableColumn("Round", value: \.categoryRound.round.rawValue)
+                        TableColumn("Last Fetched", value: \.lastFetch)
+                    }
+                }
             }
         }
         .padding()

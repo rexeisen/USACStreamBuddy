@@ -150,6 +150,17 @@ struct GenericEventResultsResponse<T: AscentRepresentable>: Codable {
     let ranking: [RankingEntry<T>]
     let startlist: [StartListEntry]
 
+    enum CodingKeys: String, CodingKey {
+        case ranking
+        case startlist
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.ranking = try container.decodeIfPresent([RankingEntry<T>].self, forKey: .ranking) ?? []
+        self.startlist = try container.decode([StartListEntry].self, forKey: .startlist)
+    }
+
     func sorted(routeId: Int, status: AscentStatus? = nil) -> [RankingEntry<T>] {
         var currentlyActive = self.ranking.filter {
             $0.ascent(routeId: routeId, status: status) != nil
@@ -251,3 +262,4 @@ struct StartListRoutePosition: Identifiable, Codable {
         case position
     }
 }
+
