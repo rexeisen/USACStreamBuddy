@@ -31,7 +31,7 @@ struct EventDetailsView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
 
                 Toggle(isOn: $isTimerOn) {
-                    Text(isTimerOn ? "Timer On" : "Timer Off")
+                    Text("Timer")
                 }
                 .onChange(of: isTimerOn) { _, newValue in
                     if newValue {
