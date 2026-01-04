@@ -145,6 +145,10 @@ final class CategoryResultsViewModel: Identifiable {
         }
 
         // Go through each route and find the item that is active
+        
+        // String of zeros with length equal to the number of routes
+        let pendingString = String(repeating: "P", count: categoryRound.routes.count)
+
         for route in categoryRound.routes {
             let currentlyActive = result.sorted(
                 routeId: route.id,
@@ -193,7 +197,7 @@ final class CategoryResultsViewModel: Identifiable {
                     )
 
                 } else if let athlete = startlist.first {
-                    var scoreRepresentation: String?
+                    var scoreRepresentation: String? = pendingString
 
                     if let ranking = result.ranking.first(where: {
                         $0.bib == athlete.bib
@@ -217,3 +221,4 @@ final class CategoryResultsViewModel: Identifiable {
         return onWall
     }
 }
+
