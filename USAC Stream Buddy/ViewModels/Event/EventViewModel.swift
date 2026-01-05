@@ -26,7 +26,8 @@ final class EventViewModel {
     func load() async {
         state = .loading
         do {
-            let request = try URLEndpoint.event(117).url()
+            // 117 is the test event
+            let request = try URLEndpoint.event(eventId).url()
             let (data, response) = try await URLSession.shared.data(for: request)
             guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode) else {
                 throw URLError(.badServerResponse)

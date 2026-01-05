@@ -1,0 +1,1177 @@
+{
+  "id": 7046,
+  "event": "R42 Longmont Climbing Collective QE 2025-26",
+  "event_id": 301,
+  "dcat_id": 376,
+  "discipline": "Lead",
+  "status": "finished",
+  "status_as_of": "2026-01-04 23:42:42 UTC",
+  "category": "F13",
+  "round": "Final",
+  "format": "USAC: Modified Redpoint",
+  "boulder_jam": true,
+  "routes": [
+    {
+      "id": 152053,
+      "name": "1",
+      "startlist": "/api/v1/routes/152053/startlist",
+      "ranking": "/api/v1/routes/152053/results"
+    },
+    {
+      "id": 152054,
+      "name": "2",
+      "startlist": "/api/v1/routes/152054/startlist",
+      "ranking": "/api/v1/routes/152054/results"
+    },
+    {
+      "id": 152055,
+      "name": "3",
+      "startlist": "/api/v1/routes/152055/startlist",
+      "ranking": "/api/v1/routes/152055/results"
+    }
+  ],
+  "ranking": [
+    {
+      "athlete_id": 2755,
+      "name": "PARK Jessica",
+      "firstname": "Jessica",
+      "lastname": "PARK",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null,
+      "bib": "1307",
+      "rank": 1,
+      "score": "2.35",
+      "ascents": [
+        {
+          "route_id": 152053,
+          "route_name": "1",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 1,
+          "corrective_rank": 6.5,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 1
+        },
+        {
+          "route_id": 152054,
+          "route_name": "2",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 1,
+          "corrective_rank": 2.0,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 1
+        },
+        {
+          "route_id": 152055,
+          "route_name": "3",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 1,
+          "corrective_rank": 1,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 2
+        }
+      ],
+      "combined_stages": null,
+      "active": false,
+      "under_appeal": false
+    },
+    {
+      "athlete_id": 3093,
+      "name": "FONG Ayana",
+      "firstname": "Ayana",
+      "lastname": "FONG",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null,
+      "bib": "1305",
+      "rank": 2,
+      "score": "3.57",
+      "ascents": [
+        {
+          "route_id": 152053,
+          "route_name": "1",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 1,
+          "corrective_rank": 6.5,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 1
+        },
+        {
+          "route_id": 152054,
+          "route_name": "2",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 1,
+          "corrective_rank": 2.0,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 1
+        },
+        {
+          "route_id": 152055,
+          "route_name": "3",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 3,
+          "corrective_rank": 3.5,
+          "score": 10,
+          "status": "confirmed",
+          "top_tries": 2
+        }
+      ],
+      "combined_stages": null,
+      "active": false,
+      "under_appeal": false
+    },
+    {
+      "athlete_id": 5610,
+      "name": "POST Clara",
+      "firstname": "Clara",
+      "lastname": "POST",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null,
+      "bib": "1308",
+      "rank": 2,
+      "score": "3.57",
+      "ascents": [
+        {
+          "route_id": 152053,
+          "route_name": "1",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 1,
+          "corrective_rank": 6.5,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 1
+        },
+        {
+          "route_id": 152054,
+          "route_name": "2",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 1,
+          "corrective_rank": 2.0,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 1
+        },
+        {
+          "route_id": 152055,
+          "route_name": "3",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 3,
+          "corrective_rank": 3.5,
+          "score": 10,
+          "status": "confirmed",
+          "top_tries": 2
+        }
+      ],
+      "combined_stages": null,
+      "active": false,
+      "under_appeal": false
+    },
+    {
+      "athlete_id": 1794,
+      "name": "REPOLA Sara",
+      "firstname": "Sara",
+      "lastname": "REPOLA",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null,
+      "bib": "1309",
+      "rank": 4,
+      "score": "4.02",
+      "ascents": [
+        {
+          "route_id": 152053,
+          "route_name": "1",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 1,
+          "corrective_rank": 6.5,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 1
+        },
+        {
+          "route_id": 152054,
+          "route_name": "2",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 4,
+          "corrective_rank": 5.0,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 2
+        },
+        {
+          "route_id": 152055,
+          "route_name": "3",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 2,
+          "corrective_rank": 2,
+          "score": 11,
+          "status": "confirmed",
+          "top_tries": 2
+        }
+      ],
+      "combined_stages": null,
+      "active": false,
+      "under_appeal": false
+    },
+    {
+      "athlete_id": 5245,
+      "name": "BALL Fiona",
+      "firstname": "Fiona",
+      "lastname": "BALL",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null,
+      "bib": "1301",
+      "rank": 5,
+      "score": "5.46",
+      "ascents": [
+        {
+          "route_id": 152053,
+          "route_name": "1",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 1,
+          "corrective_rank": 6.5,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 1
+        },
+        {
+          "route_id": 152054,
+          "route_name": "2",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 4,
+          "corrective_rank": 5.0,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 2
+        },
+        {
+          "route_id": 152055,
+          "route_name": "3",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 5,
+          "corrective_rank": 5,
+          "score": 9,
+          "status": "confirmed",
+          "top_tries": 1
+        }
+      ],
+      "combined_stages": null,
+      "active": false,
+      "under_appeal": false
+    },
+    {
+      "athlete_id": 4457,
+      "name": "THIBAULT Elise",
+      "firstname": "Elise",
+      "lastname": "THIBAULT",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null,
+      "bib": "1311",
+      "rank": 6,
+      "score": "6.1",
+      "ascents": [
+        {
+          "route_id": 152053,
+          "route_name": "1",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 1,
+          "corrective_rank": 6.5,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 1
+        },
+        {
+          "route_id": 152054,
+          "route_name": "2",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 4,
+          "corrective_rank": 5.0,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 2
+        },
+        {
+          "route_id": 152055,
+          "route_name": "3",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 7,
+          "corrective_rank": 7,
+          "score": 7,
+          "status": "confirmed",
+          "top_tries": 1
+        }
+      ],
+      "combined_stages": null,
+      "active": false,
+      "under_appeal": false
+    },
+    {
+      "athlete_id": 8224,
+      "name": "CIECIOR Kaylin",
+      "firstname": "Kaylin",
+      "lastname": "CIECIOR",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null,
+      "bib": "1304",
+      "rank": 7,
+      "score": "7.29",
+      "ascents": [
+        {
+          "route_id": 152053,
+          "route_name": "1",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 1,
+          "corrective_rank": 6.5,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 1
+        },
+        {
+          "route_id": 152054,
+          "route_name": "2",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 7,
+          "corrective_rank": 7,
+          "score": 12,
+          "status": "confirmed",
+          "top_tries": 2
+        },
+        {
+          "route_id": 152055,
+          "route_name": "3",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 8,
+          "corrective_rank": 8.5,
+          "score": 7,
+          "status": "confirmed",
+          "top_tries": 2
+        }
+      ],
+      "combined_stages": null,
+      "active": false,
+      "under_appeal": false
+    },
+    {
+      "athlete_id": 1353,
+      "name": "BREWER Charley",
+      "firstname": "Charley",
+      "lastname": "BREWER",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null,
+      "bib": "1303",
+      "rank": 8,
+      "score": "7.54",
+      "ascents": [
+        {
+          "route_id": 152053,
+          "route_name": "1",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 1,
+          "corrective_rank": 6.5,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 1
+        },
+        {
+          "route_id": 152054,
+          "route_name": "2",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 11,
+          "corrective_rank": 11,
+          "score": 8,
+          "status": "confirmed",
+          "top_tries": 2
+        },
+        {
+          "route_id": 152055,
+          "route_name": "3",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 6,
+          "corrective_rank": 6,
+          "score": 8,
+          "status": "confirmed",
+          "top_tries": 1
+        }
+      ],
+      "combined_stages": null,
+      "active": false,
+      "under_appeal": false
+    },
+    {
+      "athlete_id": 9683,
+      "name": "LAMB Ashtyn",
+      "firstname": "Ashtyn",
+      "lastname": "LAMB",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null,
+      "bib": "1306",
+      "rank": 9,
+      "score": "7.92",
+      "ascents": [
+        {
+          "route_id": 152053,
+          "route_name": "1",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 1,
+          "corrective_rank": 6.5,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 1
+        },
+        {
+          "route_id": 152054,
+          "route_name": "2",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 9,
+          "corrective_rank": 9,
+          "score": 10,
+          "status": "confirmed",
+          "top_tries": 1
+        },
+        {
+          "route_id": 152055,
+          "route_name": "3",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 8,
+          "corrective_rank": 8.5,
+          "score": 7,
+          "status": "confirmed",
+          "top_tries": 2
+        }
+      ],
+      "combined_stages": null,
+      "active": false,
+      "under_appeal": false
+    },
+    {
+      "athlete_id": 5606,
+      "name": "SZTO Nova",
+      "firstname": "Nova",
+      "lastname": "SZTO",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null,
+      "bib": "1310",
+      "rank": 10,
+      "score": "8.3",
+      "ascents": [
+        {
+          "route_id": 152053,
+          "route_name": "1",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 1,
+          "corrective_rank": 6.5,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 1
+        },
+        {
+          "route_id": 152054,
+          "route_name": "2",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 8,
+          "corrective_rank": 8,
+          "score": 11,
+          "status": "confirmed",
+          "top_tries": 2
+        },
+        {
+          "route_id": 152055,
+          "route_name": "3",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 10,
+          "corrective_rank": 11.0,
+          "score": 6,
+          "status": "confirmed",
+          "top_tries": 1
+        }
+      ],
+      "combined_stages": null,
+      "active": false,
+      "under_appeal": false
+    },
+    {
+      "athlete_id": 1355,
+      "name": "BEAUCHAMP Tallulah",
+      "firstname": "Tallulah",
+      "lastname": "BEAUCHAMP",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null,
+      "bib": "1302",
+      "rank": 11,
+      "score": "8.94",
+      "ascents": [
+        {
+          "route_id": 152053,
+          "route_name": "1",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 1,
+          "corrective_rank": 6.5,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 1
+        },
+        {
+          "route_id": 152054,
+          "route_name": "2",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 10,
+          "corrective_rank": 10,
+          "score": 9,
+          "status": "confirmed",
+          "top_tries": 2
+        },
+        {
+          "route_id": 152055,
+          "route_name": "3",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 10,
+          "corrective_rank": 11.0,
+          "score": 6,
+          "status": "confirmed",
+          "top_tries": 1
+        }
+      ],
+      "combined_stages": null,
+      "active": false,
+      "under_appeal": false
+    },
+    {
+      "athlete_id": 7783,
+      "name": "WATT Jovi",
+      "firstname": "Jovi",
+      "lastname": "WATT",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null,
+      "bib": "1312",
+      "rank": 12,
+      "score": "9.5",
+      "ascents": [
+        {
+          "route_id": 152053,
+          "route_name": "1",
+          "top": true,
+          "plus": false,
+          "restarted": false,
+          "rank": 1,
+          "corrective_rank": 6.5,
+          "score": "TOP",
+          "status": "confirmed",
+          "top_tries": 1
+        },
+        {
+          "route_id": 152054,
+          "route_name": "2",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 12,
+          "corrective_rank": 12,
+          "score": 6,
+          "status": "confirmed",
+          "top_tries": 2
+        },
+        {
+          "route_id": 152055,
+          "route_name": "3",
+          "top": false,
+          "plus": false,
+          "restarted": false,
+          "rank": 10,
+          "corrective_rank": 11.0,
+          "score": 6,
+          "status": "confirmed",
+          "top_tries": 1
+        }
+      ],
+      "combined_stages": null,
+      "active": false,
+      "under_appeal": false
+    }
+  ],
+  "startlist": [
+    {
+      "athlete_id": 1355,
+      "route_start_positions": [
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 1
+        },
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 1
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 1
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 1
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 1
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 1
+        }
+      ],
+      "name": "BEAUCHAMP Tallulah",
+      "firstname": "Tallulah",
+      "lastname": "BEAUCHAMP",
+      "bib": "1302",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null
+    },
+    {
+      "athlete_id": 5610,
+      "route_start_positions": [
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 2
+        },
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 2
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 2
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 2
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 2
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 2
+        }
+      ],
+      "name": "POST Clara",
+      "firstname": "Clara",
+      "lastname": "POST",
+      "bib": "1308",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null
+    },
+    {
+      "athlete_id": 8224,
+      "route_start_positions": [
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 3
+        },
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 3
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 3
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 3
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 3
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 3
+        }
+      ],
+      "name": "CIECIOR Kaylin",
+      "firstname": "Kaylin",
+      "lastname": "CIECIOR",
+      "bib": "1304",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null
+    },
+    {
+      "athlete_id": 7783,
+      "route_start_positions": [
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 4
+        },
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 4
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 4
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 4
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 4
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 4
+        }
+      ],
+      "name": "WATT Jovi",
+      "firstname": "Jovi",
+      "lastname": "WATT",
+      "bib": "1312",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null
+    },
+    {
+      "athlete_id": 3093,
+      "route_start_positions": [
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 5
+        },
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 5
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 5
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 5
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 5
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 5
+        }
+      ],
+      "name": "FONG Ayana",
+      "firstname": "Ayana",
+      "lastname": "FONG",
+      "bib": "1305",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null
+    },
+    {
+      "athlete_id": 2755,
+      "route_start_positions": [
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 6
+        },
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 6
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 6
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 6
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 6
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 6
+        }
+      ],
+      "name": "PARK Jessica",
+      "firstname": "Jessica",
+      "lastname": "PARK",
+      "bib": "1307",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null
+    },
+    {
+      "athlete_id": 1794,
+      "route_start_positions": [
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 7
+        },
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 7
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 7
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 7
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 7
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 7
+        }
+      ],
+      "name": "REPOLA Sara",
+      "firstname": "Sara",
+      "lastname": "REPOLA",
+      "bib": "1309",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null
+    },
+    {
+      "athlete_id": 4457,
+      "route_start_positions": [
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 8
+        },
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 8
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 8
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 8
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 8
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 8
+        }
+      ],
+      "name": "THIBAULT Elise",
+      "firstname": "Elise",
+      "lastname": "THIBAULT",
+      "bib": "1311",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null
+    },
+    {
+      "athlete_id": 1353,
+      "route_start_positions": [
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 9
+        },
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 9
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 9
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 9
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 9
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 9
+        }
+      ],
+      "name": "BREWER Charley",
+      "firstname": "Charley",
+      "lastname": "BREWER",
+      "bib": "1303",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null
+    },
+    {
+      "athlete_id": 5606,
+      "route_start_positions": [
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 10
+        },
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 10
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 10
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 10
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 10
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 10
+        }
+      ],
+      "name": "SZTO Nova",
+      "firstname": "Nova",
+      "lastname": "SZTO",
+      "bib": "1310",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null
+    },
+    {
+      "athlete_id": 5245,
+      "route_start_positions": [
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 11
+        },
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 11
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 11
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 11
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 11
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 11
+        }
+      ],
+      "name": "BALL Fiona",
+      "firstname": "Fiona",
+      "lastname": "BALL",
+      "bib": "1301",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null
+    },
+    {
+      "athlete_id": 9683,
+      "route_start_positions": [
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 12
+        },
+        {
+          "route_name": "1",
+          "route_id": 152053,
+          "position": 12
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 12
+        },
+        {
+          "route_name": "2",
+          "route_id": 152054,
+          "position": 12
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 12
+        },
+        {
+          "route_name": "3",
+          "route_id": 152055,
+          "position": 12
+        }
+      ],
+      "name": "LAMB Ashtyn",
+      "firstname": "Ashtyn",
+      "lastname": "LAMB",
+      "bib": "1306",
+      "country": null,
+      "flag_url": null,
+      "federation_id": null
+    }
+  ]
+}

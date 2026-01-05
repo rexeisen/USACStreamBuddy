@@ -100,7 +100,27 @@ struct LeadAscent: AscentRepresentable {
         case topTries = "top_tries"
     }
     
-    
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.routeID = try container.decode(Int.self, forKey: .routeID)
+        self.routeName = try container.decode(String.self, forKey: .routeName)
+        self.top = try container.decode(Bool.self, forKey: .top)
+        self.plus = try container.decode(Bool.self, forKey: .plus)
+        self.rank = try container.decodeIfPresent(Int.self, forKey: .rank)
+        self.correctiveRank = try container.decode(Double.self, forKey: .correctiveRank)
+        
+        if let stringScore = try? container.decode(String.self, forKey: .score) {
+            self.score = stringScore
+        } else if let doubleScore = try? container.decode(Double.self, forKey: .score) {
+            self.score = doubleScore.formatted()
+        } else {
+            let context = DecodingError.Context(codingPath: container.codingPath + [CodingKeys.score], debugDescription: "Score is not a String or Double")
+
+            throw DecodingError.dataCorrupted(context)
+        }
+        self.status = try container.decode(AscentStatus.self, forKey: .status)
+        self.topTries = try container.decodeIfPresent(Int.self, forKey: .topTries)
+    }
 }
 
 struct BoulderAscent: AscentRepresentable {

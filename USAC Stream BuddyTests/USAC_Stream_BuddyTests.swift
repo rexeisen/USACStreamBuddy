@@ -182,5 +182,28 @@ struct USAC_Stream_BuddyTests {
         #expect(dict["M192"] == "#3 PHAM Owen")
         #expect(dict["M193"] == "#3 PHAM Owen")
     }
+    
+    @Test(
+        "handleLeadResponse from R42"
+    )
+    @MainActor
+    func testLeadTestResponse42() async throws {
+        let vm = makeViewModel(
+            routes: [
+                152053, 152054, 152055,
+            ],
+            category: "F13",
+            discipline: .lead
+        )
+        let onWall = try await vm._test_handleLeadResponse(
+            data: jsonData(resource: "lead-response-r42")
+        )
+        let dict: [String: String] = Dictionary(
+            uniqueKeysWithValues: onWall.map { ($0.route, $0.debugDescription) }
+        )
+        #expect(dict["F131"] == "#1302 BEAUCHAMP Tallulah")
+        #expect(dict["F132"] == "#1302 BEAUCHAMP Tallulah")
+        #expect(dict["F133"] == "#1302 BEAUCHAMP Tallulah")
+    }
 }
 

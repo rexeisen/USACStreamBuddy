@@ -10,7 +10,7 @@ import SwiftUI
 struct EventDetailsView: View {
     @State private var viewModel: RoundViewModel
     @State private var isTimerOn: Bool = false
-
+    
     init(event: Event) {
         viewModel = RoundViewModel(event: event, round: .final)
     }
@@ -19,8 +19,13 @@ struct EventDetailsView: View {
         Form {
             Section {
                 Picker("Round", selection: $viewModel.selectedRound) {
-                    ForEach(Round.allCases, id: \.self) { round in
+                    ForEach(viewModel.availableRounds, id: \.self) { round in
                         Text(round.rawValue).tag(round)
+                    }
+                }
+                Picker("Discipline", selection: $viewModel.selectedDiscipline) {
+                    ForEach(viewModel.availableDisciplines, id: \.self) { selectedDiscipline in
+                        Text(selectedDiscipline.rawValue).tag(selectedDiscipline)
                     }
                 }
             }

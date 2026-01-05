@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Discipline: String, Codable {
+enum Discipline: String, Codable, Equatable, Hashable {
     case unknown
     case lead
     case boulder
